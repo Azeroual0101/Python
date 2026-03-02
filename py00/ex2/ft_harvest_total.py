@@ -1,4 +1,4 @@
-def ft_harvest_total():
+def ft_harvest_total() -> None:
     i = 1
     totale = 0
     while i < 4:

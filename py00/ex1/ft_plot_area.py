@@ -1,4 +1,4 @@
-def ft_plot_area():
+def ft_plot_area() -> None:
     area = 0
     length = 0
     width = 0
