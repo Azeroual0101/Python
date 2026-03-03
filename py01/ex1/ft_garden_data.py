@@ -8,13 +8,15 @@ class Plant:
 
 def main():
 
-    plant1 = Plant("Rose", 25, 30)
-    plant2 = Plant("Sunflower", 80, 45)
-    plant3 = Plant("Cactus", 15, 120)
+    plants = [
+        Plant("Rose", 25, 30),
+        Plant("Sunflower", 80, 45),
+        Plant("Cactus", 15, 120),
+        Plant("Tulip", 20, 25)
+    ]
     print("=== Garden Plant Registry ===")
-    print(plant1)
-    print(plant2)
-    print(plant3)
+    for i in range(4):
+        print(plants[i]) 
 
 
 if __name__ == "__main__":
