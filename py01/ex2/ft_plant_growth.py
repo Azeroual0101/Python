@@ -1,38 +1,47 @@
 class Plant:
-    def __init__(self,name: str,height: int,lifetime: int):
+    def __init__(self, name: str, height: int, lifetime: int) -> None:
         self.name = name.capitalize()
         self.height = height
-        self.lifetime =lifetime
+        self.lifetime = lifetime
         self.inial_height = height
-        self.inial_age =lifetime
+        self.inial_age = lifetime
 
-    def age(self, augment: int):
-        self.lifetime += augment
+    def age(self) -> None:
+        self.lifetime += 1
+        self.grow()
 
-    def grow(self):
-        self.height = self.inial_height + self.lifetime - self.inial_age
+    def grow(self) -> None:
+        self.height += 1
 
-    
-    def get_info(self):
-        return f"Growth this week: +{self.lifetime - self.inial_age}cm"
+    def get_info(self) -> None:
+        print(f"Growth this week: +{self.lifetime - self.inial_age}cm")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.name}: {self.height}cm, {self.lifetime} days old"
-    
-def main():
-    plant1 = Plant("rose",25,30)
-    print("=== Day 1 ===")
-    print(plant1)
-    print("=== Day 7 ===")
-    plant1.age(6)
-    plant1.grow()
-    print(plant1)
-    print(plant1.get_info())
-    print("=== Day 14 ===")
-    plant1.age(6)
-    plant1.grow()
-    print(plant1)
-    print(plant1.get_info())
+
+
+def main() -> None:
+    plants = [
+        Plant("rose", 25, 30),
+        Plant("tulip", 15, 10),
+        Plant("lily", 20, 12)
+    ]
+
+    day = 1
+    print(f"=== Day {day} ===")
+    for plant in plants:
+        print(plant)
+
+    for _ in range(6):
+        for plant in plants:
+            plant.age()
+        day += 1
+
+    print(f"=== Day {day} ===")
+    for plant in plants:
+        print(plant)
+        plant.get_info()
+
 
 if __name__ == "__main__":
     main()

@@ -1,32 +1,35 @@
 class Plant:
 
-    def __init__(self,name: str ,height: int, age: int):
+    def __init__(self, name: str, height: int, age: int) -> None:
         self.name = name.capitalize()
         self.height = height
         self.age = age
-    def __str__(self):
+
+    def __str__(self) -> str:
         return f"Created: {self.name} ({self.height}cm, {self.age} days)"
 
-def main():
+
+def main() -> None:
 
     Plants = []
     i = 0
     data = {
-        "James": [18, 65],
-        "Emma": [20, 70],
-        "Michael": [22, 75],
-        "Olivia": [25, 80],
-        "Jordan": [30, 85]
+        "rose": [25, 30],
+        "oak": [200, 365],
+        "cactus": [5, 90],
+        "sunflower": [80, 45],
+        "fern": [15, 120]
     }
-    for name, infos in data.items():
-        Plants.append(Plant(name,infos[0],infos[1]))
+    print("=== Plant Factory Output ===")
+    for name in data:
+        Plants += [(Plant(name, data[name][0], data[name][1]))]
         i += 1
-    for j in range(i):
-        print(Plants[j])
-        j += 1
+    for plant in Plants:
+        print(plant)
+
     print()
     print(f"Total plants created: {i}")
+
+
 if __name__ == "__main__":
     main()
-        
-
