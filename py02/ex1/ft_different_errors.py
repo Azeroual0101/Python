@@ -1,4 +1,5 @@
-def garden_operations(operation: str):
+def garden_operations(operation: str) -> None:
+    """Trigger different types of errors based on the operation parameter."""
     if operation == "value":
         int("abc")
 
@@ -14,6 +15,7 @@ def garden_operations(operation: str):
 
 
 def test_error_types():
+    """Test and demonstrate different built-in exception types."""
     print("=== Garden Error Types Demo ===\n")
 
     print("Testing ValueError...")
@@ -54,4 +56,7 @@ def test_error_types():
 
 
 if __name__ == "__main__":
-    test_error_types()
+    try:
+        test_error_types()
+    except Exception as e:
+        print(f"Caught an error: {e}")

@@ -1,17 +1,22 @@
 class GardenError(Exception):
+    """Base exception class for all garden-related errors."""
     pass
 
 
 class PlantError(GardenError):
+    """Exception raised for problems with plants."""
     def __init__(self, name: str) -> None:
+        """Initialize PlantError with the plant name."""
         super().__init__(f"The {name} plant is wilting!")
 
 
 class WaterError(GardenError):
+    """Exception raised for problems with watering."""
     pass
 
 
 def test_water(volume: int) -> None:
+    """Test WaterError with a given water volume."""
     print("Testing WaterError...")
     try:
         if volume <= 0:
@@ -21,6 +26,7 @@ def test_water(volume: int) -> None:
 
 
 def test_garden(name: str, volume: int) -> None:
+    """Test catching all garden errors using the base GardenError class."""
     print("Testing catching all garden errors...")
     try:
         raise PlantError(name)
@@ -35,6 +41,7 @@ def test_garden(name: str, volume: int) -> None:
 
 
 def test_plant(name: str) -> None:
+    """Test PlantError with a given plant name."""
     print("Testing PlantError...")
     try:
         raise PlantError(name)
