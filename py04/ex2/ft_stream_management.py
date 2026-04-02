@@ -1,20 +1,24 @@
 import sys
 
-# 1. En-tête
-print("=== CYBER ARCHIVES - COMMUNICATION SYSTEM ===")
+def main() -> None:
+	print("=== CYBER ARCHIVES - COMMUNICATION SYSTEM ===\n")
 
-# 2. Collecte des données (stdin via input())
-archivist_id = input("Input Stream active. Enter archivist ID: ")
-status_report = input("Input Stream active. Enter status report: ")
+	try:
+		archivist_id = input("Input Stream active. Enter archivist ID: ")
+		status_report = input("Input Stream active. Enter status report: ")
+		print()
 
-# 3. Affichage sur la sortie STANDARD (stdout)
-print(f"[STANDARD] Archive status from {archivist_id}: {status_report}", file=sys.stdout)
+		message = (
+			f"[STANDARD] Archive status from {archivist_id}: {status_report}"
+		)
+		sys.stdout.write(message + "\n")
 
-# 4. Affichage sur la sortie ALERTE (stderr)
-print("[ALERT] System diagnostic: Communication channels verified", file=sys.stderr)
+		sys.stderr.write("[ALERT] System diagnostic: Communication channels verified\n" + "\n")
 
-# 5. Suite sur la sortie STANDARD (stdout)
-print("[STANDARD] Data transmission complete", file=sys.stdout)
+		sys.stdout.write("[STANDARD] Data transmission complete"+ "\n")
+		sys.stdout.write("Three-channel communication test successful.\n")
+	except Exception as e:
+		sys.stderr.write(f"[ERROR] An error occurred: {e}\n")
 
-# 6. Confirmation finale
-print("Three-channel communication test successful.")
+if __name__ == "__main__":
+	main()

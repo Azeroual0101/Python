@@ -1,50 +1,59 @@
+import random
+
+ACH_LIST = [
+    "Crafting Genius", "World Savior", "Master Explorer",
+    "Collector Supreme", "Untouchable", "Boss Slayer",
+    "Strategist", "Unstoppable", "Speed Runner", "Survivor",
+    "Treasure Hunter", "First Steps", "Sharp Mind", "Hidden Path Finder"
+]
+
+
+def gen_player_achievements() -> set[str]:
+    n = random.randint(5, 9)
+    picks = random.sample(ACH_LIST, n)
+    return set(picks)
+
 
 def main() -> None:
-
-    alice = set(["first_kill", "level_10", "treasure_hunter", "speed_demon"])
-    bob = set(["first_kill", "level_10", "boss_slayer", "collector"])
-    charlie = set(
-        ["level_10", "treasure_hunter", "boss_slayer", "speed_demon",
-                     "perfectionist"])
-
     print("=== Achievement Tracker System ===")
-    print()
-    print(f"Player alice achievements: {alice}")
-    print(f"Player bob achievements: {bob}")
-    print(f"Player charlie achievements: {charlie}")
-    print()
 
-    print("=== Achievement Analytics ===")
-    print()
+    p1 = gen_player_achievements()
+    p2 = gen_player_achievements()
+    p3 = gen_player_achievements()
+    p4 = gen_player_achievements()
 
-    all_achievements = alice.union(bob).union(charlie)
-    print(f"All unique achievements: {all_achievements}")
-    print(f"Total unique achievements: {len(all_achievements)}")
-    print()
+    players = {
+        "Alice": p1,
+        "Bob": p2,
+        "Charlie": p3,
+        "Dylan": p4
+    }
 
-    common = alice.intersection(bob).intersection(charlie)
-    print(f"Common to all players: {common}")
+    for name in players:
+        print(f"Player {name}: {players[name]}")
 
-    rare = all_achievements.difference(
-        alice.intersection(bob)
-        .union(alice.intersection(charlie))
-        .union(bob.intersection(charlie))
-    )
-    print(f"Rare achievements (1 player): {rare}")
-    print()
+    all_ach = p1.union(p2, p3, p4)
+    print(f"All distinct achievements: {all_ach}")
 
-    alice_bob_common = alice.intersection(bob)
-    print(f"Alice vs Bob common: {alice_bob_common}")
 
-    alice_unique = alice.difference(bob)
-    print(f"Alice unique: {alice_unique}")
+    common_ach = p1.intersection(p2, p3, p4)
+    print(f"Common achievements: {common_ach}")
 
-    bob_unique = bob.difference(alice)
-    print(f"Bob unique: {bob_unique}")
+    for name in players:
+        others = set()
+        for other in players:
+            if other != name:
+                others = others.union(players[other])
+
+        unique = players[name].difference(others)
+        print(f"Only {name} has: {unique}")
+
+
+    total = set(ACH_LIST)
+    for name in players:
+        missing = total.difference(players[name])
+        print(f"{name} is missing: {missing}")
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        print(f"Error: {e}")
+    main()
