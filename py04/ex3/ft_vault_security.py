@@ -1,33 +1,38 @@
-def main() -> None:
-    print("=== CYBER ARCHIVES - VAULT SECURITY SYSTEM ===\n")
-    print("Initiating secure vault access...")
-
+def secure_archive(
+    filename: str,
+    mode: str = "r",
+    content: str = ""
+) -> tuple[bool, str]:
     try:
-        with open("classified_data.txt", "r") as f:
-            print("Vault connection established with failsafe protocols\n")
-            print("SECURE EXTRACTION:")
-            for line in f:
-                print(line, end="")
-            print("\n")
-
-        with open("security_protocols.txt", "w") as f:
-            print("SECURE PRESERVATION:")
-            f.write("[CLASSIFIED] New security protocols archived\n")
-
-        with open("security_protocols.txt", "r") as f:
-            for line in f:
-                print(line, end="")
-
-        print("Vault automatically sealed upon completion\n")
-
-    except FileNotFoundError:
-        print("[ERROR] Vault file not found")
-
+        if mode == "r":
+            with open(filename, "r") as f:
+                data = f.read()
+            return True, data
+        elif mode == "w":
+            with open(filename, "w") as f:
+                f.write(content)
+            return True, "Content successfully written to file"
+        else:
+            return False, "Invalid mode"
     except Exception as e:
-        print(f"[ERROR] Unexpected issue: {e}")
+        return False, str(e)
 
-    finally:
-        print("All vault operations completed with maximum security.")
+
+def main() -> None:
+    print("=== Cyber Archives Security ===")
+
+    print("\nUsing 'secure_archive' to read from a nonexistent file:")
+    print(secure_archive("/not/existing/file"))
+
+    print("\nUsing 'secure_archive' to read from an inaccessible file:")
+    print(secure_archive("/etc/master.passwd"))
+
+    print("\nUsing 'secure_archive' to read from a regular file:")
+    success, data = secure_archive("ancient_fragment.txt")
+    print((success, data))
+
+    print("\nUsing 'secure_archive' to write previous content to a new file:")
+    print(secure_archive("new_file.txt", "w", data))
 
 
 if __name__ == "__main__":
