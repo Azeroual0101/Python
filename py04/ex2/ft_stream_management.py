@@ -13,11 +13,15 @@ def main() -> None:
     print(f"Accessing file '{filename}'")
 
     file: typing.IO = None
+    content: list = []
     try:
         file = open(filename, "r")
-        content = file.read()
         print("---\n")
-        print(content, end="")
+        line = file.readline()
+        while line:
+            content.append(line)
+            print(line, end="")
+            line = file.readline()
         print("\n---")
 
     except Exception as e:
@@ -33,16 +37,16 @@ def main() -> None:
 
     print("Transform data:")
     print("---\n")
-    new_content = ""
-    for line in content.split("\n"):
-        if line:
-            new_content += line + "#\n"
-    print(new_content, end="")
+    new_content: list = []
+    for line in content:
+        new_line = line[:-1] + "#\n"
+        new_content += new_line
+        print(new_line, end="")
     print("\n---")
 
     sys.stdout.write("Enter new file name (or empty): ")
     sys.stdout.flush()
-    new_file = sys.stdin.readline().strip()
+    new_file = sys.stdin.readline()[:-1]
 
     if new_file == "":
         print("Not saving data.")
@@ -53,7 +57,8 @@ def main() -> None:
     f: typing.IO = None
     try:
         f = open(new_file, "w")
-        f.write(new_content)
+        for line in new_content:
+            f.write(line)
         print(f"Data saved in file '{new_file}'.")
     except Exception as e:
         sys.stderr.write(

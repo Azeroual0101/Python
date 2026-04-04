@@ -6,16 +6,18 @@ def secure_archive(
     try:
         if mode == "r":
             with open(filename, "r") as f:
-                data = f.read()
-            return True, data
+                return True, f.read()
+
         elif mode == "w":
             with open(filename, "w") as f:
                 f.write(content)
             return True, "Content successfully written to file"
+
         else:
             return False, "Invalid mode"
+
     except Exception as e:
-        return False, str(e)
+        return False, f"{e}"
 
 
 def main() -> None:
@@ -25,7 +27,7 @@ def main() -> None:
     print(secure_archive("/not/existing/file"))
 
     print("\nUsing 'secure_archive' to read from an inaccessible file:")
-    print(secure_archive("/etc/master.passwd"))
+    print(secure_archive("/etc/shadow"))
 
     print("\nUsing 'secure_archive' to read from a regular file:")
     success, data = secure_archive("ancient_fragment.txt")

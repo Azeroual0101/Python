@@ -32,11 +32,20 @@ def main() -> None:
 
     print("Transform data:")
     print("---\n")
-    new_content = ""
-    for line in content.split("\n"):
-        if line:
+    new_content: str = ""
+    line = ""
+    i = 0
+    while i < len(content):
+        if content[i] == "\n":
             new_content += line + "#\n"
-    print(new_content, end="")
+            print(line + "#\n", end="")
+            line = ""
+        else:
+            line += content[i]
+        i += 1
+    if line:
+        new_content += line + "#\n"
+        print(line + "#\n", end="")
     print("\n---")
 
     new_file = input("Enter new file name (or empty): ")
