@@ -10,9 +10,3 @@ def strength_potion() -> str:
     fire = create_fire()
     water = create_water()
     return f"Strength potion brewed with '{fire}' and '{water}'"
-
-healing_potion() 
-
-print("++++++++++++++++")
-
-strength_potion()
