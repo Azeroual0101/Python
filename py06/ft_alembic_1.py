@@ -1,9 +1,13 @@
-import elements
+from elements import create_water
 
 def main() -> None:
     print("=== Alembic 0 ===")
     print("Using: 'import ...' structure to access elements.py")
-    print("Testing create_water:", elements.create_water())
+    print("Testing create_water:", create_water())
     print()
+
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(e)

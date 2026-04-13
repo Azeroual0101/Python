@@ -5,5 +5,9 @@ def main() -> None:
     print("Accessing alchemy/elements.py using 'import ...' structure")
     print("Testing create_earth:",alchemy.elements.create_earth())
     print()
+
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print(e)
