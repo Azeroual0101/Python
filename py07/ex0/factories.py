@@ -1,6 +1,6 @@
 from .base import Creature, CreatureFactory
 
-# En relation avec Water 
+
 class Aquabub(Creature):
     def __init__(self) -> None:
         super().__init__("Aquabub", "Water")
@@ -17,7 +17,6 @@ class Torragon(Creature):
         return "Torragon uses Hydro Pump!"
 
 
-# En relation avec Fire 
 class Flameling(Creature):
     def __init__(self) -> None:
         super().__init__("Flameling", "Fire")
@@ -40,7 +39,8 @@ class FlameFactory(CreatureFactory):
 
     def create_evolved(self) -> Pyrodon:
         return Pyrodon()
-    
+
+
 class AquaFactory(CreatureFactory):
     def create_base(self) -> Aquabub:
         return Aquabub()
