@@ -14,7 +14,7 @@ class ContactType(str, Enum):
 
 class AlienContact(BaseModel):
     contact_id: str = Field(..., min_length=5, max_length=15)
-    timestamp: datetime
+    timestamp: datetime = Field(...)
     location: str = Field(min_length=3, max_length=100)
     contact_type: ContactType
     signal_strength: float = Field(ge=0.0, le=10.0)
@@ -47,7 +47,7 @@ class AlienContact(BaseModel):
 
 def main() -> None:
     print("Alien Contact Log Validation")
-    print("=" * 40)
+    print("========================================")
 
     try:
         contact = AlienContact(
@@ -60,7 +60,6 @@ def main() -> None:
             witness_count=5,
             message_received="Greetings from Zeta Reticuli"
         )
-
         print("Valid contact report:")
         print(f"ID: {contact.contact_id}")
         print(f"Type: {contact.contact_type}")
@@ -73,7 +72,7 @@ def main() -> None:
     except ValidationError as e:
         print("Unexpected error:", e)
 
-    print("\n" + "=" * 40)
+    print("========================================")
 
     try:
         AlienContact(

@@ -34,8 +34,8 @@ def main() -> None:
         print(f"Crew: {station.crew_size} people")
         print(f"Power: {station.power_level}%")
         print(f"Oxygen: {station.oxygen_level}%")
-        status = 'Opperational' if station.is_operational else 'Offline'
-        print(f"Status: {status}\n")
+        status_map = {True: 'Operational', False: 'Offline'}
+        print(f"Status: {status_map[station.is_operational]}\n")
 
     except ValidationError as e:
         print(f"Unexpected error: {e}")
