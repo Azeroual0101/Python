@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field, ValidationError, model_validator
 from datetime import datetime
 from typing import Optional
 from enum import Enum
+from typing_extensions import Self
 
 
 class ContactType(str, Enum):
@@ -12,7 +13,7 @@ class ContactType(str, Enum):
 
 
 class AlienContact(BaseModel):
-    contact_id: str = Field(min_length=5, max_length=15)
+    contact_id: str = Field(..., min_length=5, max_length=15)
     timestamp: datetime
     location: str = Field(min_length=3, max_length=100)
     contact_type: ContactType
@@ -20,10 +21,10 @@ class AlienContact(BaseModel):
     duration_minutes: int = Field(ge=1, le=1440)
     witness_count: int = Field(ge=1, le=100)
     message_received: Optional[str] = Field(default=None, max_length=500)
-    is_verified: bool = False
+    is_verified: bool = Field(default=False)
 
     @model_validator(mode="after")
-    def check_rules(self):
+    def check_rules(self) -> Self:
         if not self.contact_id.startswith("AC"):
             raise ValueError("Contact ID must start with 'AC'")
 
@@ -51,9 +52,9 @@ def main() -> None:
     try:
         contact = AlienContact(
             contact_id="AC_2024_001",
-            timestamp="2024-01-01T12:00:00",
+            timestamp=datetime.fromisoformat("2024-01-01T12:00:00"),
             location="Area 51, Nevada",
-            contact_type="radio",
+            contact_type=ContactType.radio,
             signal_strength=8.5,
             duration_minutes=45,
             witness_count=5,
@@ -77,9 +78,9 @@ def main() -> None:
     try:
         AlienContact(
             contact_id="AC_BAD",
-            timestamp="2024-01-01T12:00:00",
+            timestamp=datetime.fromisoformat("2024-01-01T12:00:00"),
             location="Mars Base",
-            contact_type="telepathic",
+            contact_type=ContactType.telepathic,
             signal_strength=5.0,
             duration_minutes=10,
             witness_count=1
